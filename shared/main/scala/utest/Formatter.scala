@@ -3,7 +3,7 @@ import utest.framework.Result
 import utest.util.Tree
 import scala.util.{Failure, Success}
 import java.io.{PrintWriter, StringWriter}
-
+import acyclic.file
 /**
  * Represents something that can format a single test result or a [[Tree]] of 
  * them. 

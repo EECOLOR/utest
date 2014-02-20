@@ -1,10 +1,10 @@
 package utest
 
 import scala.concurrent.{Await, ExecutionContext, Future}
-import scala.util.{Failure, Success}
+
 import concurrent.duration._
 import java.io.{PrintWriter, StringWriter}
-
+import acyclic.file
 /**
  * Platform specific stuff that differs between JVM and JS
  */

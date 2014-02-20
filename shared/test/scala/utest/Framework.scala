@@ -1,7 +1,7 @@
 package utest
 
 import scala.util.{Failure, Success}
-
+import acyclic.file
 import utest.framework._
 import utest.framework.Result
 import scala.util.Success
@@ -119,7 +119,7 @@ object Framework extends TestSuite{
         assert(res == Success(()))
       }
     }
-    
+
     "nesting"-{
       "importStatementsWork"-{
         // issue #7, just needs to compile

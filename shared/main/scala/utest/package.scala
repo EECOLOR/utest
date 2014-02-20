@@ -1,16 +1,12 @@
 
 import scala.reflect.ClassTag
-import scala.reflect.macros.Context
-import scala.util.{Failure, Success, Try}
 import utest.framework.{TestTreeSeq, Test}
 import utest.asserts._
-import utest.util.Tree
+
 import concurrent.duration._
 import utest.util.Tree
 
-/**
- * Created by haoyi on 1/24/14.
- */
+
 package object utest {
   implicit val retryInterval = new RetryInterval(100.millis)
   implicit val retryMax = new RetryMax(1.second)
@@ -67,9 +63,34 @@ package object utest {
 
   val ClassTag = scala.reflect.ClassTag
 
-
-
   val TestSuite = framework.TestSuite
   type TestSuite  = framework.TestSuite
+
+  def runSuite(tests: Tree[Test],
+               path: Array[String],
+               args: Array[String],
+               addCount: String => Unit,
+               log: String => Unit,
+               addTotal: String => Unit) = {
+    val (indices, found) = tests.resolve(path)
+    addTotal(found.length.toString)
+
+    implicit val ec =
+      if (utest.util.ArgParse.find("--parallel", _.toBoolean, false, true)(args)){
+        concurrent.ExecutionContext.global
+      }else{
+        ExecutionContext.RunNow
+      }
+
+    val formatter = DefaultFormatter(args)
+    val results = tests.run(
+      (path, s) => {
+        addCount(s.value.isSuccess.toString)
+        log(formatter.formatSingle(path, s))
+      },
+      testPath = path
+    )(ec)
+    formatter.format(results)
+  }
 }
 

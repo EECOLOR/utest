@@ -9,6 +9,7 @@ import scala.collection.mutable.ArrayBuffer
  * them, so you get nice error messages for free.
  */
 package object asserts {
+  import acyclic.pkg
   type AssertEntry[T] = (String, (LoggedValue => Unit) => T)
 
   /**

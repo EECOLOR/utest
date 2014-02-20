@@ -1,7 +1,7 @@
 package utest
 
 import utest.framework.{TestSuite, Test}
-
+import acyclic.file
 
 /**
 * Test suite for all the assertions that uTest comes bundled with.

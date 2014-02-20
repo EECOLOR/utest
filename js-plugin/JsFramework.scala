@@ -1,5 +1,5 @@
 package utest.runner
-import sbt.testing.SubclassFingerprint
+
 import scala.scalajs.sbtplugin.ScalaJSEnvironment
 
 

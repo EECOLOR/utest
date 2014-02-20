@@ -1,6 +1,6 @@
 package utest
 package framework
-
+import acyclic.file
 import scala.reflect.macros.Context
 import scala.language.experimental.macros
 import utest.framework.Test
@@ -14,32 +14,6 @@ abstract class TestSuite{
    * The tests within this `object`.
    */
   def tests: util.Tree[Test]
-
-  def runSuite(path: Array[String],
-               args: Array[String],
-               addCount: String => Unit,
-               log: String => Unit,
-               addTotal: String => Unit) = {
-    val (indices, found) = tests.resolve(path)
-    addTotal(found.length.toString)
-
-    implicit val ec =
-      if (utest.util.ArgParse.find("--parallel", _.toBoolean, false, true)(args)){
-        concurrent.ExecutionContext.global
-      }else{
-        ExecutionContext.RunNow
-      }
-
-    val formatter = DefaultFormatter(args)
-    val results = tests.run(
-      (path, s) => {
-        addCount(s.value.isSuccess.toString)
-        log(formatter.formatSingle(path, s))
-      },
-      testPath = path
-    )(ec)
-    formatter.format(results)
-  }
 }
 
 object TestSuite{

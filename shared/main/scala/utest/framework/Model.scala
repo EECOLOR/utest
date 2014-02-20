@@ -2,7 +2,7 @@ package utest.framework
 
 import scala.util.{Random, Success, Failure, Try}
 import scala.concurrent.duration.Deadline
-
+import acyclic.file
 
 import scala.language.experimental.macros
 import scala.concurrent.{Await, Future, ExecutionContext}
@@ -38,6 +38,11 @@ case class Test(name: String, TestThunkTree: TestThunkTree){
   )
 }
 
+
+object TestTreeSeq{
+  implicit def toTestSeq(t: Tree[Test]) = new TestTreeSeq(t)
+}
+import TestTreeSeq.toTestSeq
 /**
  * Extension methods on `TreeSeq[Test]`
  */

@@ -1,15 +1,7 @@
 package utest.runner
 
-import utest.toTestSeq
 import sbt.testing._
-import sbt.testing
-import collection.mutable
-import utest.framework.{TestTreeSeq, TestSuite, Result}
-import java.util.concurrent.atomic.{AtomicInteger, AtomicReference}
-import scala.concurrent.ExecutionContext.Implicits.global
-import utest.util.{ArgParse, Tree}
-import scala.annotation.tailrec
-import scala.concurrent.ExecutionContext
+import utest.framework.TestSuite
 
 class JvmRunner(val args: Array[String],
                 val remoteArgs: Array[String])
@@ -17,7 +9,8 @@ class JvmRunner(val args: Array[String],
   def doStuff(s: Seq[String], loggers: Seq[Logger], name: String) = {
     val cls = Class.forName(name + "$")
     val suite = cls.getField("MODULE$").get(cls).asInstanceOf[TestSuite]
-    val res = suite.runSuite(
+    val res = utest.runSuite(
+      suite.tests,
       s.toArray,
       args,
       s => if(s.toBoolean) success.incrementAndGet() else failure.incrementAndGet(),

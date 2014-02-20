@@ -1,10 +1,10 @@
 package utest.runner
 import sbt.testing._
-import java.util.concurrent.atomic.{AtomicInteger, AtomicReference}
-import scala.annotation.tailrec
+
+
 import scala.scalajs.sbtplugin.environment.rhino.{Utilities, CodeBlock}
 import scala.scalajs.sbtplugin.ScalaJSEnvironment
-import org.mozilla.javascript.{NativeObject, RhinoException}
+import org.mozilla.javascript.RhinoException
 
 /**
  * Wraps a Scala callback in a Java-ish object that has the right signature
