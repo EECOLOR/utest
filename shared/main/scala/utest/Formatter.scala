@@ -2,7 +2,7 @@ package utest
 import utest.framework.Result
 import utest.util.Tree
 import scala.util.{Failure, Success}
-import java.io.{PrintWriter, StringWriter}
+import java.io.{PrintStream, PrintWriter, StringWriter}
 import acyclic.file
 /**
  * Represents something that can format a single test result or a [[Tree]] of 
@@ -27,6 +27,16 @@ object DefaultFormatter{
 
     new DefaultFormatter(color, truncate, trace
     )
+  }
+  def getTrace(e: Throwable): String = {
+
+    val output = new StringBuilder()
+
+    e.printStackTrace(new PrintStream(new java.io.OutputStream {
+      def write(b: Int): Unit = output.append(b.toChar)
+    }))
+
+    output.toString()
   }
 }
 /**
@@ -56,7 +66,7 @@ class DefaultFormatter(color: Boolean = true,
     if (!trace) str
     else{
       val traceStr = r.value match{
-        case Failure(e) => PlatformShims.getTrace(e)
+        case Failure(e) => DefaultFormatter.getTrace(e)
         case _ =>
       }
       str + traceStr

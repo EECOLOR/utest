@@ -2,6 +2,7 @@ package utest
 import acyclic.file
 import scala.concurrent.Future
 import scala.util.{Failure, Success}
+import java.io.{PrintStream, PrintWriter, StringWriter}
 
 /**
  * Platform specific stuff that differs between JVM and JS
@@ -16,7 +17,5 @@ object PlatformShims {
   }
 
   def await[T](f: Future[T]): T = f.value.get.get
-  def getTrace(e: Throwable): String = {
-    ""
-  }
+
 }

@@ -14,7 +14,7 @@ object Framework extends TestSuite{
     "helloWorld"-{
       val test = TestSuite{
         "test1"-{
-          throw new Exception("test1")
+          throw new Exception("I DIED LOL")
         }
         "test2"-{
           1
@@ -24,13 +24,32 @@ object Framework extends TestSuite{
           a(10)
         }
       }
-      val results = test.run()
+      val results = new TestTreeSeq(test).run()
       assert(test.length == 4)
       assert(test.leaves.length == 3)
       assert(results.length == 4)
       assert(results.leaves.length == 3)
       assert(results.leaves.count(_.value.isFailure) == 2)
+
       assert(results.leaves.count(_.value.isSuccess) == 1)
+      val errors =
+        results
+          .leaves
+          .collect{ case Result(_, Failure(e), _) => e}
+          .toList
+
+      val expected = List(
+        "java.lang.Exception: I DIED LOL",
+        "java.lang.IndexOutOfBoundsException: 10"
+      )
+
+      assert(errors.map(_.toString) == expected)
+
+      // LinearSeqOptimized should be somewhere in the stack trace since
+      // it's in the call path that makes the IndexOutOfBoundsException
+      // blow up
+      assert(errors.map(DefaultFormatter.getTrace).mkString.contains("LinearSeqOptimized"))
+
       results.leaves.map(_.value).toList
     }
     "failures"-{
