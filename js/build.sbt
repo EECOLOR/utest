@@ -38,5 +38,5 @@ name := "utest"
 
 scalaVersion := "2.10.3"
 
-version := "0.1.1-JS"
+version := "0.1.2-JS"
 

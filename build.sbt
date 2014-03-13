@@ -31,6 +31,6 @@ addCompilerPlugin("com.lihaoyi.acyclic" %% "acyclic" % "0.1.1")
 
 testFrameworks += new TestFramework("utest.runner.JvmFramework")
 
-version := "0.1.1"
+version := "0.1.2"
 
 name := "utest"
