@@ -11,8 +11,8 @@ object Tracer{
 
   def apply[T](c: Context)(func: c.Tree, exprs: c.Expr[T]*): c.Expr[Unit] = {
     import c.universe._
-    val loggerName = Ident(c.fresh(newTermName("$log")))
-    val tempName = Ident(c.fresh(newTermName("$temp")))
+    val loggerName = c.fresh(newTermName("$log"))
+    val tempName = c.fresh(newTermName("$temp"))
 
     object tracingTransformer extends Transformer {
       override def transform(tree: Tree): Tree = {
@@ -39,7 +39,7 @@ object Tracer{
     }
 
     val trees = exprs.map(expr =>
-      q"${expr.tree.pos.lineContent.trim} -> (($loggerName: ${tq""}) => ${tracingTransformer.transform(expr.tree)})"
+      q"${expr.tree.pos.lineContent.trim} -> ($loggerName => ${tracingTransformer.transform(expr.tree)})"
     )
 
     c.Expr[Unit](c.resetLocalAttrs(q"""$func(..$trees)"""))

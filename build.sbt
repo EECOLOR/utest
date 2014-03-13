@@ -17,22 +17,20 @@ resolvers += Resolver.sonatypeRepo("snapshots")
 Build.sharedSettings
 
 libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-reflect" % "2.11.0-RC1",
-//  "org.scalamacros" % "quasiquotes_2.10.3" % "2.0.0-M3",
+  "org.scala-lang" % "scala-reflect" % "2.10.3",
+  "org.scalamacros" % "quasiquotes_2.10.3" % "2.0.0-M3",
   "org.scala-sbt" % "test-interface" % "1.0",
   "com.lihaoyi.acyclic" %% "acyclic" % "0.1.1" % "provided"
 )
 
-//addCompilerPlugin("org.scalamacros" % "paradise_2.10.3" % "2.0.0-M3")
+addCompilerPlugin("org.scalamacros" % "paradise_2.10.3" % "2.0.0-M3")
 
-//autoCompilerPlugins := true
+autoCompilerPlugins := true
 
-//addCompilerPlugin("com.lihaoyi.acyclic" %% "acyclic" % "0.1.1")
+addCompilerPlugin("com.lihaoyi.acyclic" %% "acyclic" % "0.1.1")
 
 testFrameworks += new TestFramework("utest.runner.JvmFramework")
 
 version := "0.1.1"
-
-scalaVersion := "2.11.0-RC1"
 
 name := "utest"

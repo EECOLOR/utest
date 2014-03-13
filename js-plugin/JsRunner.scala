@@ -23,10 +23,12 @@ class JsRunner(val args: Array[String],
     environment.runInContextAndScope { (context, scope) =>
       new CodeBlock(context, scope) with Utilities {
         try {
+          println("--------------------", name.replace('.', '_'))
           val module = getModule(name.replace('.', '_'))
+          println("::::::::::::::::::::", module)
           val results = callMethod(
             module,
-            "runSuite",
+            "runSuite__Lutest_util_Tree__AT__AT__Lscala_Function1__Lscala_Function1__Lscala_Function1__T",
             toScalaJSArray(s.toArray),
             toScalaJSArray(args),
             JsCallback(s => if(s.toBoolean) success.incrementAndGet() else failure.incrementAndGet()),
