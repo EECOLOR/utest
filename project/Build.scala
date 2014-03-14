@@ -2,7 +2,7 @@ import sbt._
 import Keys._
 object Build extends sbt.Build{
   val sharedSettings = Seq(
-    organization := "com.lihaoyi.utest",
+    organization := "com.lihaoyi",
 
     // Sonatype
     publishArtifact in Test := false,

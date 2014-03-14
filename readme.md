@@ -1,4 +1,4 @@
-µTest 0.1.1
+µTest 0.1.2
 ===========
 
 uTest (pronounced micro-test) is a lightweight testing library for Scala. It's key features are:
@@ -32,7 +32,7 @@ Getting Started
 ===============
 
 ```scala
-libraryDependencies += "com.lihaoyi.utest" % "utest_2.10" % "0.1.1"
+libraryDependencies += "com.lihaoyi" % "utest_2.10" % "0.1.2"
 ```
 
 Add the following to your `built.sbt` and you can immediately begin defining and running tests programmatically. [Continue reading](#defining-and-running-a-test-suite) to see how to define and run your test suites, or jump to [Running tests with SBT](#running-tests-with-sbt) to find out how to mark and run your test suites from the SBT console.
@@ -501,7 +501,7 @@ ScalaJS and SBT
 To get SBT to run your uTest suites under ScalaJS, add the following to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.lihaoyi.utest" % "utest_2.10" % "0.1.1-JS"
+libraryDependencies += "com.lihaoyi" % "utest_2.10" % "0.1.2-JS"
 
 (loadedTestFrameworks in Test) := {
   import scala.scalajs.sbtplugin.ScalaJSPlugin.ScalaJSKeys._
