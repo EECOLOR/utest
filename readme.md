@@ -367,7 +367,7 @@ Running tests with SBT
 To run tests using SBT, add the following to your `build.sbt` file:
 
 ```scala
-libraryDependencies += "com.lihaoyi.utest" % "utest_2.10" % "0.1.2"
+libraryDependencies += "com.lihaoyi" % "utest_2.10" % "0.1.2"
 
 testFrameworks += new TestFramework("utest.runner.JvmFramework")
 ```
@@ -515,9 +515,9 @@ libraryDependencies += "com.lihaoyi" % "utest_2.10" % "0.1.2-JS"
 And the following to your `project/build.sbt`
 
 ```scala
-addSbtPlugin("com.lihaoyi.utest" % "utest-js-plugin" % "0.1.2")
+addSbtPlugin("com.lihaoyi" % "utest-js-plugin" % "0.1.2")
 
-libraryDependencies += "com.lihaoyi.utest" % "utest-runner_2.10" % "0.1.2"
+libraryDependencies += "com.lihaoyi" % "utest-runner_2.10" % "0.1.2"
 ```
 
 Note that your project must already be a ScalaJS project. With these snippets set up, all of the commands described in [Running tests with SBT](#running-tests-with-sbt) should behave identically, except that your test suites will be compiled to Javascript and run in ScalaJS's `RhinoBasedScalaJSEnvironment` instead of on the JVM. Test selection, coloring, etc. should all work unchanged.
