@@ -522,7 +522,7 @@ libraryDependencies += "com.lihaoyi" % "utest-runner_2.10" % "0.1.2"
 
 Note that your project must already be a ScalaJS project. With these snippets set up, all of the commands described in [Running tests with SBT](#running-tests-with-sbt) should behave identically, except that your test suites will be compiled to Javascript and run in ScalaJS's `RhinoBasedScalaJSEnvironment` instead of on the JVM. Test selection, coloring, etc. should all work unchanged.
 
-This version of uTest is compatible with ScalaJS 0.3.
+This version of uTest is compatible with ScalaJS 0.4.x.
 
 Why uTest
 =========
